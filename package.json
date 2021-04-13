@@ -11,6 +11,7 @@
     "build:report": "cross-env NODE_ENV=production webpack --progress --config webpack.config.analyzer.js",
     "dll": "webpack --config build/webpack.config.dll.js",
     "lint-fix": "eslint --fix --ext .js,.jsx,.vue src",
+    "commit": "git-cz",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "devDependencies": {
