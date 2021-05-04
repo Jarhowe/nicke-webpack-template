@@ -1,8 +1,5 @@
 <template>
     <div id="app">
-        <h1>语言测试: {{$t('title')}}</h1>
-        <Button type="primary" @click="switchEvent">{{$t('buttonText')}}</Button>
-        <hr/>
         <router-view/>
     </div>
 </template>

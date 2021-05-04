@@ -5,89 +5,84 @@
 
 **索引**
 
-* [安装](#安装)
-* [使用](#使用)
-* [架构](#架构)
+* [特征](#特征)
+* [启动](#启动)
+* [发布](#发布)
+* [规范](#规范)
+* [兼容](#兼容)
 
 
-## 安装
+## 特征
+1. 配置多环境变量
+2. 支持中/英国际化
+3. 支持Element-ui组件
+4. Vue-router 路由管理
+5. Vuex 状态管理
+6. Axios 封装及接口管理
+7. 配置Report打包分析
+8. 添加git提交代码规范
+9. 支持js/ts混合使用(扩展中...)
+10. 常用业务组件封装(扩展中...)
+
+## 启动
 
 ```
 ＃克隆该项目
 git clone https://github.com/Jarhowe/nicke-Webpack-template.git
 
-# 安装依赖关系
+# 进入项目目录
+cd nicke-Webpack-template
+
+# 安装依赖
 yarn install
 
-# 编译开发环境
+# 启动服务
 yarn start
 
 ```
 
-## 使用
+## 发布
 
 ```
 # 1、使用dll进行分包处理
 yarn dll
 
-# 2、构建生产环境
+# 2、预览发布生产环境
 yarn build:prod
 
-# 3、构建分析
-# 3-1、可单独配置了一个命令进行打包分析:
+# 4、构建分析
+# 4-1、可单独配置了一个命令进行打包分析:
 yarn build:report
 
-# 3-2、可以通过传参数配置集成到prod
+# 4-2、可以通过传参数配置集成到prod
 yarn build:prod --report
 
-# 4、扩展选项
-# 4-1、开启gzip压缩
+# 5、扩展选项
+# 5-1、在项目目录webpack.config.js开启gzip压缩(默认false)即可,
 productionGzip: true
-# 4-2、开启gzip后，需要在nginx启动gzip模块
+
+# 5-2、开启gzip后，需要在nginx启动gzip模块
 gzip on; 
 gzip_buffers 4 16k;
 gzip_comp_level 5;
 gzip_types text/plain application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg  image/gif image/png;
 
-# 5、生成version日志
+```
+
+## 规范
+
+```
+# 1、生成version日志
 yarn version
 
+# 2、提交代码到git代码仓库
+yarn commit
 ```
 
-## 架构
+## 兼容
 
-在大型单页面开发中推荐以下目录架构：
-```bash
-src
-    ├── README.md
-    ├── assets                  // 全局资源目录
-    │    ├── images             // 图片资源
-    │    ├── styles             // 样式配置
-    │    ├── svg-icons          // svg图标
-    │    └── fonts              // 自定义字体文件
-    ├── components              // 公共组件目录
-    │    ├── Svg-icon           // svg图标组件
-    │    ├── plugins            // 自定义插件
-    │    └── index.js           // 组件入口
-    ├── i18n                    // 国际化
-    │    ├── index.js           // 入口文件
-    │    ├── modules
-    │       ├── zh.js
-    │       └── en.js
-    ├── router                  
-    │    ├── routers            // 绑定路由组件名字及组件路径
-    │    └── index.js           // 路由入口及拦截
-    ├── store                   // 状态管理
-    │    ├── index.js        
-    │    ├── getters.js
-    │    └── modules            
-    ├── page                    // 页面视图
-    │    ├── common
-    │    │    └── ...
-    │    ├── modules
-    │    │    └── ...
-    │    └── ...
-    ├── App.vue                 // 默认程序入口
-    ├── settings.js             // 默认配置
-    └── main.js
-```
+Modern browsers and Internet Explorer 10+.
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| --------- | --------- | --------- | --------- |
+| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
