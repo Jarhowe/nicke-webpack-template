@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <Button type="primary" round size="small" @click.stop="switchEvent">中/英</Button>
         <router-view/>
     </div>
 </template>

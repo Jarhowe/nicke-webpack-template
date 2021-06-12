@@ -1,15 +1,20 @@
 <template>
     <div class="container flex-row flex-column align-center">
-        <div>
+        <div class="image">
             <img src="~@/assets/images/180x180.png"/>
         </div>
-        <h1>Welcome to use nicke-webpack-template</h1>
+        <h1>{{$t('title')}}</h1>
+        <h3>{{getTitle}}</h3>
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
-    name: 'demo'
+    name: 'demo',
+    computed: {
+        ...mapGetters(['getTitle'])
+    }
 };
 </script>
 
@@ -26,5 +31,9 @@ export default {
 }
 .align-center {
     align-items: center;
+}
+.image {
+    border-radius: 15px;
+    overflow: hidden;
 }
 </style>

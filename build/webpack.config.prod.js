@@ -8,11 +8,11 @@ const Settings = require('../src/settings');
 const BaseWebpackConfig = require('./webpack.config.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const Env = process.env.NODE_ENV === 'test' ? require('../env/test.env') : require('../env/prod.env');
 
@@ -85,7 +85,7 @@ const prodWebpackConfig = merge(BaseWebpackConfig, {
                 commonChunk: {
                     name: 'commonChunk',
                     filename: Utils.assetsPath('js/[name].[chunkhash:8].js'),
-                    test (module, chunks) {
+                    test(module, chunks) {
                         let res = (
                             module.resource && /\.js$/.test(module.resource) && 
                             module.resource.indexOf(path.join(__dirname, '../src')) === 0 &&
@@ -102,7 +102,7 @@ const prodWebpackConfig = merge(BaseWebpackConfig, {
                 commonVendor: {
                     name: 'commonVendor',
                     filename: Utils.assetsPath('js/[name].[chunkhash:8].js'),
-                    test (module, chunks) {
+                    test(module, chunks) {
                         let res = (
                                 module.resource && /\.js$/.test(module.resource) &&
                                     module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0 &&

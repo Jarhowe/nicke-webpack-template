@@ -14,7 +14,9 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 }, {});
 
 const store = new Vuex.Store({
-    state: {},
+    state: {
+        title: 'Store - Test'
+    },
     getters: {
         ...getters
     },

@@ -41,4 +41,4 @@ module.exports = {
             vendor: ['vue/dist/vue.min.js', 'vue-router', 'lodash', 'jquery', 'axios']
         }
     }
-}
+};
