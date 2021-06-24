@@ -114,6 +114,16 @@ module.exports = {
                     limit: Config.build.base64Limit,
                     name: Utils.assetsPath(`fonts/${assetsHashName}`)
                 }
+            },
+            {
+                // 处理xml资源
+                test: /\.xml$/,
+                loader: 'xml-loader'
+            },
+            {
+                // 处理markdown资源
+                test: /\.md$/,
+                use: ['html-loader', 'md-loader']
             }
         ]
     },

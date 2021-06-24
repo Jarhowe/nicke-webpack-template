@@ -88,12 +88,16 @@ const devWebpackConfig = merge(BaseWebpackConfig, {
             }
         ]
     },
+    // 性能
+    performance: {
+        hints: false
+    },
     // 优化
     optimization: {
         // 替代new webpack.NoEmitOnErrorsPlugin()
         noEmitOnErrors: true,
         // 替代new webpack.NamedModulesPlugin()
-        //热更新显示文件名
+        // 热更新显示文件名
         namedModules: true
     },
     // source-map
@@ -134,7 +138,6 @@ const devWebpackConfig = merge(BaseWebpackConfig, {
 module.exports = new Promise((resolve, reject) => {
     portfinder.basePort = devWebpackConfig.devServer.port;
     portfinder.getPort((err, port) => {
-        console.log('asdsad:', err, port);
         if (err) {
             reject(err);
         } else {

@@ -9,6 +9,7 @@ module.exports = {
         proxyTable: {},
         // Dev Server settings
         host: '0.0.0.0',
+        // Port
         port: 8080,
         // 是否自动打开浏览器
         autoOpenBrowser: false,
@@ -27,7 +28,6 @@ module.exports = {
         assetsRoot: path.resolve(__dirname, './dist'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-
         // 设置限制资源大小，让资源转base64处理
         base64Limit: 8 * 1024,  // 8kb
         // source Maps
@@ -36,9 +36,17 @@ module.exports = {
         // Gzip
         productionGzip: false,
         productionGzipExtensions: ['js', 'css'],
-        // 配置要抽离dll文件的模块
+        // 是否引入dll文件
+        dllEnable: true,
+        // 选择要打包到dll模块
         dllModule: {
-            vendor: ['vue/dist/vue.min.js', 'vue-router', 'lodash', 'jquery', 'axios']
+            vendor: ['vue/dist/vue.min.js', 'vue-router'],
+            lodash: ['lodash'],
+            jquery: ['jquery'],
+            axios: ['axios'],
+            dayjs: ['dayjs']
         }
-    }
+    },
+    // 启动版本
+    versionEnable: true
 };

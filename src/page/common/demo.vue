@@ -5,15 +5,20 @@
         </div>
         <h1>{{$t('title')}}</h1>
         <h3>{{getTitle}}</h3>
+        <p>当前日期: {{localDate}}</p>
     </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import dayjs from 'dayjs';
 export default {
     name: 'demo',
     computed: {
-        ...mapGetters(['getTitle'])
+        ...mapGetters(['getTitle']),
+        localDate() {
+            return dayjs().format('YYYY-MM-DD');
+        }
     }
 };
 </script>

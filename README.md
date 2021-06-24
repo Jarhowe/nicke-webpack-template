@@ -3,24 +3,26 @@
 <div align="center">基于webpack4配置Vue+Element开箱即用的单页面前端模板</div>
 
 
-**索引**
+## 目录
 
-* [特征](#特征)
-* [启动](#启动)
-* [发布](#发布)
-* [规范](#规范)
-* [兼容](#兼容)
+* [一、特征](#特征)
+* [二、启动](#启动)
+* [三、发布](#发布)
+* [四、规范](#规范)
+* [五、兼容](#兼容)
 
 
 ## 特征
-1. 配置多环境变量
+1. 区分development、test、production环境, 可自由选择并进行开发
 2. 支持中/英国际化
-3. 支持Element-ui组件
+3. 支持按需引入Element-ui组件
 4. Vue-router 路由管理
 5. Vuex 状态管理
 6. Axios 封装及接口管理
-7. 配置Report打包分析
-8. 添加git提交代码规范
+7. 支持DLL动态链接库，提升打包速度
+8. 支持Report打包分析
+9. 添加git提交代码规范
+10. 增加版本号，并通过轮询检测版本更新，做到更新提示(扩展中...)
 9. 支持js/ts混合使用(扩展中...)
 10. 常用业务组件封装(扩展中...)
 
@@ -31,42 +33,27 @@
 git clone https://github.com/Jarhowe/nicke-Webpack-template.git
 
 # 进入项目目录
-cd nicke-Webpack-template
+cd nicke-webpack-template
 
 # 安装依赖
-yarn install
+npm install/yarn install
 
 # 启动服务
-yarn start
+npm install/yarn start
 
 ```
 
-## 发布
+## 打包
 
 ```
-# 1、使用dll进行分包处理
+# 1、启动DLL动态链接库优化打包速度，可webpack.config.js配置下dllEnable选择为true即可【推荐使用，减少模块不能再次被打包】
 yarn dll
 
-# 2、预览发布生产环境
+# 打包到测试环境
+yarn test
+
+# 打包到生产环境
 yarn build:prod
-
-# 4、构建分析
-# 4-1、可单独配置了一个命令进行打包分析:
-yarn build:report
-
-# 4-2、可以通过传参数配置集成到prod
-yarn build:prod --report
-
-# 5、扩展选项
-# 5-1、在项目目录webpack.config.js开启gzip压缩(默认false)即可,
-productionGzip: true
-
-# 5-2、开启gzip后，需要在nginx启动gzip模块
-gzip on; 
-gzip_buffers 4 16k;
-gzip_comp_level 5;
-gzip_types text/plain application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg  image/gif image/png;
-
 ```
 
 ## 规范

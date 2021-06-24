@@ -1,0 +1,12 @@
+{
+    "test": {
+        "version": "v1.0.0",
+        "date": "xxx",
+        "description": "更新内容..."
+    },
+    "production": {
+        "version": "v1.0.0",
+        "date": "xxx",
+        "description": "更新内容..."
+    }
+}

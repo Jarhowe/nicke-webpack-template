@@ -13,7 +13,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const SetVersionReleasePlugin = require('../plugin/versionReleasePlugin');
 
 const CommonCssLoader = [
     MiniCssExtractPlugin.loader,
@@ -43,14 +42,8 @@ if (Config.build.dllEnable) {
     }));
 }
 
-// 记录版本
-const VersionPluginList = [];
-if (Config.versionEnable) {
-    VersionPluginList.push(new SetVersionReleasePlugin());
-}
-
 const prodWebpackConfig = merge(BaseWebpackConfig, {
-    mode: 'production',
+    mode: 'test',
     output: {
         path: Config.build.assetsRoot,
         filename: Utils.assetsPath('js/[name].[chunkhash:8].js'),
@@ -148,19 +141,14 @@ const prodWebpackConfig = merge(BaseWebpackConfig, {
             name: "manifest"
         }
     },
-    // 性能
-    performance: {
-        hints: false
-    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: require('../env/prod.env')
+                NODE_ENV: require('../env/test.env')
             }
         }),
         // 清理上一次打包记录
         new CleanWebpackPlugin(),
-        // 引入dll动态链接库
         ...DLLPluginList,
         // 压缩html
         new HtmlWebpackPlugin({
@@ -196,9 +184,7 @@ const prodWebpackConfig = merge(BaseWebpackConfig, {
         // 保持chunkId不变
         new webpack.NamedChunksPlugin(),
         // 保持moduleID稳定
-        new webpack.HashedModuleIdsPlugin(),
-        // 设置版本
-        ...VersionPluginList
+        new webpack.HashedModuleIdsPlugin()
     ]
 });
 
@@ -217,7 +203,7 @@ if (Config.build.productionGzip) {
     );
 }
 
-// 如果带--report参数，则分析模块
+// 启动分析模块
 if (Config.build.bundleAnalyzerReport) {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     prodWebpackConfig.plugins.push(new BundleAnalyzerPlugin());
