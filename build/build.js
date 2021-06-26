@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const Config = require('../webpack.config');
 const webpackConfig = require('./webpack.config.prod');
 
-const spinner = ora(`现在为「${process.env.NODE_ENV}」环境building打包构建, 请稍候...`);
+const spinner = ora(`现在为「${process.env.NODE_ENV}」环境打包构建, 请稍候...`);
 spinner.start();
 
 rm(path.join(Config.build.assetsRoot, Config.build.assetsSubDirectory), err => {

@@ -1,12 +1,17 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
+const webpack = require('webpack');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const Config = require('../webpack.config');
 
-// 资源输出路径处理函数，方便其他地方调用
-exports.assetsPath = function(_path) {
+const setAssetsFilePath = (_path) => {
     const assetsSubDirectory = process.env.NODE_ENV === 'development' ? Config.dev.assetsSubDirectory : Config.build.assetsSubDirectory;
     return path.posix.join(assetsSubDirectory, _path);
 };
+
+// 资源输出路径处理函数，方便其他地方调用
+exports.assetsPath = (_path) => setAssetsFilePath(_path);
 
 // 创建错误弹窗提示
 exports.createNotifierCallback = () => {
@@ -29,4 +34,30 @@ exports.createNotifierCallback = () => {
 // 从工作目录下找路径
 exports.resolve = function(dir) {
     return path.resolve(__dirname, '..', dir);
-}
+};
+
+
+// 引入dll插件
+exports.useDllPlugins = function() {
+    let plugins = [];
+    if (Config.build.dllEnable) {
+        const dllFiles = (fs.readdirSync(path.resolve(__dirname, '../dll'))) || [];
+        dllFiles.forEach(fileNameItem => {
+            if (/.*\.dll.js$/.test(fileNameItem)) {
+                plugins.push(new AddAssetHtmlPlugin({
+                    filepath: path.resolve(__dirname, '../dll', fileNameItem),
+                    outputPath: setAssetsFilePath('library'),
+                    publicPath: setAssetsFilePath('library'),
+                    includeSourcemap: false,
+                    hash: true
+                }));
+            }
+            if (/.*\.manifest.json$/.test(fileNameItem)) {
+                plugins.push(new webpack.DllReferencePlugin({
+                    manifest: path.resolve(__dirname, '../dll', fileNameItem)
+                }));
+            }
+        });
+    }
+    return plugins;
+};

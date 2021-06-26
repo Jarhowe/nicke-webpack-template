@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/webpack.config.dev.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --profile --config build/webpack.config.dev.js",
     "build:test": "cross-env NODE_ENV=test node build/build.js",
     "build:prod": "cross-env NODE_ENV=production node build/build.js",
     "build:report": "cross-env NODE_ENV=production webpack --progress --config build/webpack.config.analyzer.js",

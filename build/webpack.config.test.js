@@ -12,35 +12,12 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const CommonCssLoader = [
     MiniCssExtractPlugin.loader,
     'css-loader',
     'postcss-loader'
 ];
-
-// dll动态链接库
-const DLLPluginList = [];
-if (Config.build.dllEnable) {
-    // 主要是将生成的vendor.dll.js文件加上hash值插入到页面中。
-    DLLPluginList.push(new AddAssetHtmlPlugin({
-        // dll文件位置
-        filepath: path.resolve(__dirname, '../dll/vendor.dll.js'),
-        // dll最终输出的目录
-        outputPath: Utils.assetsPath('library'), 
-        // dll 引用路径
-        publicPath: Utils.assetsPath('library'),
-        includeSourcemap: false,
-        hash: true
-    }));
-    // 使用vendor-manifest.json引用dll
-    DLLPluginList.push(new webpack.DllReferencePlugin({
-        // context：与Dllplugin里的context所指向的上下文保持一致，这里都是指向了根目录
-        context: __dirname,
-        manifest: require('../dll/vendor.manifest.json')
-    }));
-}
 
 const prodWebpackConfig = merge(BaseWebpackConfig, {
     mode: 'test',
@@ -149,7 +126,8 @@ const prodWebpackConfig = merge(BaseWebpackConfig, {
         }),
         // 清理上一次打包记录
         new CleanWebpackPlugin(),
-        ...DLLPluginList,
+        // 引入dll动态链接库
+        ...(Utils.useDllPlugins()),
         // 压缩html
         new HtmlWebpackPlugin({
             filename: Config.build.index,
