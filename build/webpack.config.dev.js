@@ -16,6 +16,7 @@ const PORT = process.env.PORT && Number(process.env.PORT) || Config.dev.port;
 
 const devWebpackConfig = merge(BaseWebpackConfig, {
     mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
     // devServer 配置
     devServer: {
         // 输出日志级别

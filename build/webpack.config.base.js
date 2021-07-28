@@ -72,7 +72,7 @@ module.exports = {
             },
             {
                 // 处理svg资源
-                test: /\.svg$/,
+                test: /\.(svg)(\?.*)?$/,
                 loader: 'svg-sprite-loader',
                 // 排除node_modules资源
                 exclude: /node_modules/,
@@ -88,6 +88,7 @@ module.exports = {
                 // 处理图片资源
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
+                exclude: Utils.resolve('src/assets/svg-icons'),
                 options: {
                     // 配置资源大小限制，超出则转让base64处理
                     limit: Config.build.base64Limit,
